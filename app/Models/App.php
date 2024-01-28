@@ -23,4 +23,9 @@ class App extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function shorts()
+    {
+        return $this->morphMany(Short::class, 'shortable');
+    }
 }

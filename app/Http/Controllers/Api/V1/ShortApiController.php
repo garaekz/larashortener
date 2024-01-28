@@ -13,6 +13,10 @@ class ShortApiController extends Controller
     public function store(StoreShortApiRequest $request)
     {
         $data = $request->validated();
+
+        return response()->json([
+            'data' => auth()->user()->shorts()->create($data),
+        ], 201);
     }
 
     /**
@@ -20,7 +24,7 @@ class ShortApiController extends Controller
      */
     public function show($code)
     {
-        $short = Short::activeByCode($code, auth()->user()->id, true)->firstOrFail();
+        $short = Short::activeByCode($code, auth()->user())->firstOrFail();
 
         $this->authorize('view', $short);
 

@@ -18,12 +18,11 @@ return new class extends Migration
             $table->string('url');
             $table->string('code');
             $table->integer('hits')->default(0);
-            $table->foreignIdFor(User::class)->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(App::class)->nullable()->constrained()->cascadeOnDelete();
             $table->timestamp('expires_at')->nullable();
             $table->timestamp('last_hit_at')->nullable();
             $table->string('status')->default('active');
             $table->softDeletes();
+            $table->morphs('shortable');
             $table->timestamps();
         });
     }

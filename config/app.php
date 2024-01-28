@@ -187,4 +187,8 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'code_generator' => [
+        'min_length' => 4,
+        'runes' => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    ],
 ];

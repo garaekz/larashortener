@@ -29,21 +29,18 @@ class Short extends Model
         'last_hit_at' => 'datetime',
     ];
 
-    public function user()
+    public function shortable()
     {
-        return $this->belongsTo(User::class);
+        return $this->morphTo();
     }
 
-    public function app()
+    public function scopeActiveByCode($query, $code, $model)
     {
-        return $this->belongsTo(App::class);
-    }
-
-    public function scopeActiveByCode($query, $code, $id, $isApp = false)
-    {
-        $column = $isApp ? 'app_id' : 'user_id';
         return $query->where('code', $code)
-            ->where($column, $id)
-            ->where('status', ShortEnum::ACTIVE);
+            ->where('status', ShortEnum::ACTIVE)
+            ->where(function ($q) use ($model) {
+                $q->where('shortable_id', $model->id)
+                  ->where('shortable_type', $model->getMorphClass());
+            });
     }
 }

@@ -28,9 +28,11 @@ class StoreShortApiRequest extends FormRequest
             'code' => [
                 'nullable',
                 'alpha_num:ascii',
+                'min:' . config('app.code_generator.min_length'),
                 'max:255',
-                Rule::unique('short_urls', 'code')->where(function ($query) {
-                    return $query->where('app_id', auth()->user()->id);
+                Rule::unique('shorts', 'code')->where(function ($query) {
+                    return $query->where('shortable_type', App::class)
+                        ->where('shortable_id', auth()->user()->id);
                 }),
             ],
             'expires_at' => ['nullable', 'date'],

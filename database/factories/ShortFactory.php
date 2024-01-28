@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\App;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Short>
@@ -20,9 +21,7 @@ class ShortFactory extends Factory
     {
         return [
             'url' => $this->faker->url,
-            'code' => $this->faker->word,
-            'user_id' => User::factory(),
-            'app_id' => App::factory(),
+            'code' => Str::random(config('app.code_generator.min_length')),
         ];
     }
 }
