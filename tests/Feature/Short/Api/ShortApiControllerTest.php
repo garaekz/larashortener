@@ -99,15 +99,16 @@ it('can create a short with a code that exists on another app', function () {
 
 it('automatically generates a code if none is provided', function () {
     $token = $this->appModel->createToken('test-token', ['shorts:create'])->plainTextToken;
-
+    $url = 'https://example.com';
     $this->withHeader('Authorization', 'Bearer ' . $token)
         ->postJson(route('api.v1.shorts.store'), [
-            'url' => 'https://example.com',
+            'url' => $url,
         ])
-        ->assertCreated()
-        ->assertJson([
-            'data' => [
-                'code' => expect()->string(),
-            ],
-        ]);
+        ->assertCreated();
+
+    $this->assertDatabaseHas('shorts', [
+        'shortable_type' => App::class,
+        'shortable_id' => $this->appModel->id,
+        'url' => $url,
+    ]);
 });

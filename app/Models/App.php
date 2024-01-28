@@ -28,4 +28,9 @@ class App extends Model
     {
         return $this->morphMany(Short::class, 'shortable');
     }
+
+    public function settings()
+    {
+        return $this->morphMany(Setting::class, 'settingable');
+    }
 }
