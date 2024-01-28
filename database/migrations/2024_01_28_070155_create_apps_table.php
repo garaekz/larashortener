@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('apps', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('domain');
             $table->foreignIdFor(User::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
