@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Short;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreShortRequest extends FormRequest
+class UpdateShortRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
