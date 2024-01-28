@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Short\StoreShortApiRequest;
 use App\Models\Short;
-class ShortApiController extends Controller
+use App\Transformers\ShortApiTransformer;
+
+class ShortApiController extends BaseController
 {
     /**
      * Store a newly created resource in storage.
@@ -19,9 +21,7 @@ class ShortApiController extends Controller
             $short = auth()->user()->shorts()->create($data);
         }
 
-        return response()->json([
-            'data' => $short,
-        ], 201);
+        return $this->item($short, new ShortApiTransformer, 201);
     }
 
     /**
