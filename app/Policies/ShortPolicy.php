@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\App;
 use App\Models\Short;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -19,9 +20,9 @@ class ShortPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Short $short): bool
+    public function view(App $app, Short $short): bool
     {
-        //
+        return $app->tokenCan('shorts:view');
     }
 
     /**

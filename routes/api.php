@@ -17,3 +17,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(
+    [
+        'middleware' => [
+            'auth:sanctum',
+            'ability:admin,shorts:view,shorts:create',
+        ],
+        'prefix' => 'v1',
+        'as' => 'api.v1.',
+        'namespace' => 'App\Http\Controllers\Api\V1',
+    ],
+    function () {
+        Route::get('shorts/{code}', 'ShortApiController@show')->name('shorts.show');
+        Route::post('shorts', 'ShortApiController@store')->name('shorts.store');
+    }
+);
