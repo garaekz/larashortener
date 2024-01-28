@@ -33,6 +33,6 @@ class ShortApiController extends BaseController
 
         $this->authorize('view', $short);
 
-        return ['data' => $short];
+        return $this->item($short, new ShortApiTransformer);
     }
 }

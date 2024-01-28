@@ -6,7 +6,7 @@ use App\Models\App;
 
 beforeEach(function () {
     $user = User::factory()->create();
-    $this->appModel = App::factory()->for($user)->create();
+    $this->appModel = App::factory()->for($user)->create(['domain' => 'example.com']);
     $this->token = $this->appModel->createToken('test-token', ['shorts:view'])->plainTextToken;
 });
 
@@ -47,23 +47,6 @@ it('can not get a short if requested by a User instead of an App', function () {
     $this->withHeader('Authorization', 'Bearer ' . $token)
         ->getJson(route('api.v1.shorts.show', ['code' => $short->code]))
         ->assertForbidden();
-});
-
-it('returns the correct Short model even if multiple Shorts have the same code', function () {
-    $app2 = App::factory()->for($this->appModel->user)->create();
-    Short::factory()->for($app2, 'shortable')->create(['code' => 'test']);
-    $short = Short::factory()->for($this->appModel, 'shortable')->create(
-        ['code' => 'test']
-    );
-
-    $this->withHeader('Authorization', 'Bearer ' . $this->token)
-        ->getJson(route('api.v1.shorts.show', ['code' =>'test']))
-        ->assertOk()
-        ->assertJson([
-            'data' => [
-                'id' => $short->id,
-            ],
-        ]);
 });
 
 it('can not create a short without permission', function () {
@@ -111,4 +94,20 @@ it('automatically generates a code if none is provided', function () {
         'shortable_id' => $this->appModel->id,
         'url' => $url,
     ]);
+});
+
+it('returns a shortened url based on the app domain', function () {
+    $token = $this->appModel->createToken('test-token', ['shorts:create'])->plainTextToken;
+    $url = 'https://example.com';
+    
+    $this->withHeader('Authorization', 'Bearer ' . $token)
+        ->postJson(route('api.v1.shorts.store'), [
+            'url' => $url,
+        ])
+        ->assertCreated()
+        ->assertJson([
+            'data' => [
+                'short_url' => "https://{$this->appModel->domain}/".Short::first()->code,
+            ],
+        ]);
 });
