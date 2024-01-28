@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\App;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class ShortFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'url' => $this->faker->url,
+            'code' => $this->faker->word,
+            'user_id' => User::factory(),
+            'app_id' => App::factory(),
         ];
     }
 }
