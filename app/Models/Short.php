@@ -43,4 +43,14 @@ class Short extends Model
                   ->where('shortable_type', $model->getMorphClass());
             });
     }
+
+    public function scopeFindByUrl($query, $url, $model)
+    {
+        return $query->where('url', $url)
+            ->where('status', ShortEnum::ACTIVE)
+            ->where(function ($q) use ($model) {
+                $q->where('shortable_id', $model->id)
+                  ->where('shortable_type', $model->getMorphClass());
+            });
+    }
 }

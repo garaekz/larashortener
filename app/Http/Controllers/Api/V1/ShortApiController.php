@@ -12,10 +12,15 @@ class ShortApiController extends Controller
      */
     public function store(StoreShortApiRequest $request)
     {
-        $data = $request->validated();
+        $short = Short::findByUrl($request->url, auth()->user())->first();
+        
+        if (!$short) {
+            $data = $request->validated();
+            $short = auth()->user()->shorts()->create($data);
+        }
 
         return response()->json([
-            'data' => auth()->user()->shorts()->create($data),
+            'data' => $short,
         ], 201);
     }
 
