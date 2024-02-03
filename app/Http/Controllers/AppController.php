@@ -13,7 +13,9 @@ class AppController extends Controller
      */
     public function index()
     {
-        //
+        return inertia('Apps', [
+            'apps' => App::all()
+        ]);
     }
 
     /**
@@ -29,7 +31,9 @@ class AppController extends Controller
      */
     public function store(StoreAppRequest $request)
     {
-        //
+        App::create($request->validated());
+
+        return redirect()->route('apps.index');
     }
 
     /**

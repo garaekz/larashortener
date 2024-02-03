@@ -15,9 +15,21 @@ class App extends Model
 
     protected $fillable = [
         'name',
+        'domain',
         'token',
         'user_id',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($app) {
+            if (empty($app->user_id)) {
+                $app->user_id = auth()->id();
+            }
+        });
+    }
 
     public function user()
     {

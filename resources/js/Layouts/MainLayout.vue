@@ -39,7 +39,7 @@ const logout = () => {
 <div class="flex-1 bg-background">
     <div class="container max-w-screen-2xl grid lg:grid-cols-5">
         <SideMenu />
-        <div class="col-span-3 lg:col-span-4 lg:border-l bg-gray-100 dark:bg-gray-900">
+        <div class="col-span-3 lg:col-span-4 lg:border-l">
             <!-- Page Content -->
             <main>
                 <slot />
