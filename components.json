@@ -6,11 +6,11 @@
     "config": "tailwind.config.js",
     "css": "resources/css/app.css",
     "baseColor": "slate",
-    "cssVariables": true
+    "cssVariables": false
   },
   "framework": "laravel",
   "aliases": {
-    "components": "@/components",
+    "components": "@/Components",
     "utils": "@/lib/utils"
   }
 }
