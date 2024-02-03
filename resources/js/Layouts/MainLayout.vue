@@ -37,9 +37,11 @@ const logout = () => {
 <Banner />
 <TopMenu />
 <div class="flex-1 bg-background">
-    <div class="container max-w-screen-2xl grid lg:grid-cols-5">
-        <SideMenu />
-        <div class="col-span-3 lg:col-span-4 lg:border-l">
+    <div class="container max-w-screen-2xl grid sm:grid-cols-3 lg:grid-cols-5">
+        <div class="hidden md:flex col-span-1">
+            <SideMenu />
+        </div>
+        <div class="col-span-3 sm:col-span-2 lg:col-span-4 lg:border-l">
             <!-- Page Content -->
             <main>
                 <slot />

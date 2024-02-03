@@ -57,7 +57,7 @@ const showApiKey = async (app) => {
         Apps
       </h2>
     </template>
-    <div class="hidden space-y-6 p-10 pb-16 md:block">
+    <div class="space-y-6 py-6 md:p-10 pb-16 md:block">
       <div class="space-y-0.5">
         <h2 class="text-2xl font-bold tracking-tight">
           API Keys
