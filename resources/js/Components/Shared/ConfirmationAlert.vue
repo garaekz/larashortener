@@ -11,11 +11,19 @@ import {
 } from '@/Components/ui/alert-dialog';
 import { Button } from '@/Components/ui/button';
 
+const options = ref({
+    title: '',
+    description: '',
+    buttonText: '',
+});
+
 const internalShow = ref(false);
 let resolvePromise;
 
 defineExpose({
-    show() {
+    show(config) {
+        options.value = config;
+
         internalShow.value = true;
         return new Promise((resolve) => {
             resolvePromise = resolve;
@@ -30,27 +38,22 @@ const accept = () => {
     internalShow.value = false;
     resolvePromise(true);
 };
-
-const close = () => {
-    emit('close');
-    internalShow.value = false;
-    resolvePromise(false);
-};
 </script>
 <template>
     <AlertDialog v-model:open="internalShow">
         <AlertDialogContent>
             <AlertDialogHeader>
-                <AlertDialogTitle>Are you sure absolutely sure?</AlertDialogTitle>
+                <AlertDialogTitle>
+                    {{ options.title }}
+                </AlertDialogTitle>
                 <AlertDialogDescription>
-                    This action cannot be undone. This preset will no longer be
-                    accessible by you or others you&apos;ve shared it with.
+                    {{ options.description }}
                 </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                 <Button variant="destructive" @click="accept">
-                    Agree
+                    {{ options.buttonText }}
                 </Button>
             </AlertDialogFooter>
         </AlertDialogContent>
