@@ -7,7 +7,7 @@ import { Label } from '@/Components/ui/label';
 import { Button } from '@/Components/ui/button';
 import { ClipboardDocumentIcon as CopyIcon } from '@heroicons/vue/24/outline';
 import { useClipboard } from '@vueuse/core';
-import ConfirmationModal from '@/Components/Shared/ConfirmationModal.vue';
+import ConfirmationAlert from '@/Components/Shared/ConfirmationAlert.vue';
 
 defineProps({
   apps: Array,
@@ -18,7 +18,7 @@ const { copy } = useClipboard()
 
 const resetApiKey = async (app) => {
   if (app.apiKey) return;
-  
+
   const ok = await confirmRefreshRef.value.show();
   if (ok) {
     const { data } = await axios.get(`/api/apps/${app.id}/token`);
@@ -96,6 +96,6 @@ const showApiKey = async (app) => {
         </div>
       </div>
     </div>
-    <ConfirmationModal ref="confirmRefreshRef" />
+    <ConfirmationAlert ref="confirmRefreshRef" />
   </MainLayout>
 </template>
