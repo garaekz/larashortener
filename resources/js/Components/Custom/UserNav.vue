@@ -3,8 +3,8 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@/Components/ui/avatar'
-import { Button } from '@/Components/ui/button'
+} from '@/Components/ui/avatar';
+import { Button } from '@/Components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +14,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from '@/Components/ui/dropdown-menu'
+} from '@/Components/ui/dropdown-menu';
+import { router } from '@inertiajs/vue3';
+
+defineProps({
+  auth: Object,
+});
+
+const logout = () => {
+    router.post(route('logout'));
+};
 </script>
 
 <template>
@@ -22,7 +31,7 @@ import {
     <DropdownMenuTrigger as-child>
       <Button variant="ghost" class="relative h-8 w-8 rounded-full">
         <Avatar class="h-8 w-8">
-          <AvatarImage src="/avatars/01.png" alt="@shadcn" />
+          <AvatarImage :src="$page.props.auth.user.profile_photo_url" alt="@shadcn" />
           <AvatarFallback>SC</AvatarFallback>
         </Avatar>
       </Button>
@@ -31,10 +40,10 @@ import {
       <DropdownMenuLabel class="font-normal flex">
         <div class="flex flex-col space-y-1">
           <p class="text-sm font-medium leading-none">
-            shadcn
+            {{ $page.props.auth.user.name }}
           </p>
           <p class="text-xs leading-none text-muted-foreground">
-            m@example.com
+            {{ $page.props.auth.user.email }}
           </p>
         </div>
       </DropdownMenuLabel>
@@ -55,9 +64,8 @@ import {
         <DropdownMenuItem>New Team</DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
-      <DropdownMenuItem>
-        Log out
-        <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+      <DropdownMenuItem as="button" @click="logout" class="w-full cursor-pointer">
+        Log Out
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
