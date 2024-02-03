@@ -31,8 +31,8 @@ class AppController extends Controller
      */
     public function store(StoreAppRequest $request)
     {
-        App::create($request->validated());
-
+        $app = App::create($request->validated());
+        
         return redirect()->route('apps.index');
     }
 
@@ -66,5 +66,13 @@ class AppController extends Controller
     public function destroy(App $app)
     {
         //
+    }
+
+    public function token(App $app)
+    {
+        $app->tokens()->delete();
+        $token = $app->createToken($app->name, ['shorts:view', 'shorts:create'])->plainTextToken;
+        $tokenParts = explode('|', $token);
+        return response()->json(['token' => $tokenParts[1]]);
     }
 }
