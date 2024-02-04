@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\NavigationController;
+use App\Http\Controllers\ShortController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,4 +37,5 @@ Route::group(
         });
 
         Route::apiResource('apps', AppController::class);
-});
+        Route::apiResource('shorts', ShortController::class);
+    });

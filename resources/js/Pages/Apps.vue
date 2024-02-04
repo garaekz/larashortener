@@ -70,7 +70,8 @@ const showApiKey = async (app) => {
         <CreateApp />
       </div>
       <div class="flex flex-col space-y-4 py-2">
-        <div v-for="app in apps" class="space-y-2 flex flex-col md:flex-row md:items-center justify-between rounded-lg border p-4">
+        <div v-for="app in apps"
+          class="space-y-2 flex flex-col md:flex-row md:items-center justify-between rounded-lg border p-4">
           <div class="space-y-0.5">
             <h4 class="font-medium text-base">
               {{ app.name }}
