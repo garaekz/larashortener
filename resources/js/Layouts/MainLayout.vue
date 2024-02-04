@@ -41,12 +41,9 @@ const logout = () => {
         <div class="hidden md:flex col-span-1">
             <SideMenu />
         </div>
-        <div class="col-span-3 sm:col-span-2 lg:col-span-4 lg:border-l">
-            <!-- Page Content -->
-            <main>
-                <slot />
-            </main>
-        </div>
+        <main class="col-span-3 md:col-span-2 lg:col-span-4 lg:border-l">
+            <slot />
+        </main>
     </div>
 </div>
 </template>

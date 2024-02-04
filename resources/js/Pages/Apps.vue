@@ -70,7 +70,7 @@ const showApiKey = async (app) => {
         <CreateApp />
       </div>
       <div class="flex flex-col space-y-4 py-2">
-        <div v-for="app in apps" class="space-y-2 flex flex-row items-center justify-between rounded-lg border p-4">
+        <div v-for="app in apps" class="space-y-2 flex flex-col md:flex-row md:items-center justify-between rounded-lg border p-4">
           <div class="space-y-0.5">
             <h4 class="font-medium text-base">
               {{ app.name }}
@@ -98,7 +98,7 @@ const showApiKey = async (app) => {
               </Label>
               <Input v-model="app.showApiKey" id="link" default-value="********************************" read-only
                 disabled
-                class="h-9 w-[420px] text-sm bg-transparent focus-visible:ring-0 focus-visible:ring-offset-transparent focus-visible:ring-offset-0 focus-visible:ring-transparent focus-visible:ring-opacity-0" />
+                class="h-9 w-full grow text-sm bg-transparent focus-visible:ring-0 focus-visible:ring-offset-transparent focus-visible:ring-offset-0 focus-visible:ring-transparent focus-visible:ring-opacity-0" />
             </div>
             <button @click="showApiKey(app)" class="hover:underline">
               Show

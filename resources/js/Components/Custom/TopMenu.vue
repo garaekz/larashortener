@@ -4,6 +4,8 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/Components/ui/button'
 import { ScrollArea } from '@/Components/ui/scroll-area'
 import UserNav from './UserNav.vue';
+import MobileMenu from './MobileMenu.vue';
+import { Link } from '@inertiajs/vue3';
 
 defineProps()
 
@@ -14,15 +16,12 @@ const toggleDark = useToggle(isDark)
 <template>
     <header class="sticky z-40 top-0 bg-background/80 backdrop-blur-lg border-b border-border">
         <div class="container flex justify-between h-14 max-w-screen-2xl items-center">
-            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-10 py-2 mr-2 px-2 text-base flex-shrink-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-1591" data-state="closed">
-                <svg viewBox="0 0 15 15" width="1.2em" height="1.2em" class="h-5 w-5"><path fill="currentColor" fill-rule="evenodd" d="M8 2h5.5a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H8zM7 2H1.5a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5H7zm-7 .5A1.5 1.5 0 0 1 1.5 1h12A1.5 1.5 0 0 1 15 2.5v10a1.5 1.5 0 0 1-1.5 1.5h-12A1.5 1.5 0 0 1 0 12.5z" clip-rule="evenodd"></path></svg>
-                <span class="sr-only">Toggle Menu</span>
-            </button>
+            <MobileMenu />
             <div class="mr-4 hidden md:flex">
-                <a href="/" class="mr-6 flex items-center space-x-2">
+                <Link href="/" class="mr-6 flex items-center space-x-2">
                     <svg class="h-6 w-6" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_102_1338)"><path d="M208 128L128 208" stroke="#41B883" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path><path d="M192 40L40 192" stroke="#41B883" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path></g><defs><clipPath id="clip0_102_1338"><rect width="256" height="256" fill="white"></rect></clipPath></defs></svg>
                     <span class="font-bold">Larashortener</span>
-                </a>
+                </Link>
                 <nav class="flex items-center space-x-6 text-sm font-medium">
                     <a href="/docs/components/accordion" class="transition-colors hover:text-foreground/80 text-foreground/60">
                         Components
