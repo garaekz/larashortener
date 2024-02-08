@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class App extends Model
 {
@@ -15,7 +16,7 @@ class App extends Model
 
     protected $fillable = [
         'name',
-        'domain',
+        'description',
         'token',
         'user_id',
     ];
@@ -27,6 +28,10 @@ class App extends Model
         static::creating(function ($app) {
             if (empty($app->user_id)) {
                 $app->user_id = auth()->id();
+            }
+
+            if (empty($app->ulid)) {
+                $app->ulid = strtolower((string) Str::ulid());
             }
         });
     }

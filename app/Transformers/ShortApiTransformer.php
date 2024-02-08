@@ -16,11 +16,10 @@ class ShortApiTransformer extends TransformerAbstract
     public function transform(Short $model)
     {
         $app = $model->shortable;
-        $url = Str::startsWith($app->domain, ['http://', 'https://']) ? "{$app->domain}/{$model->code}" : "https://{$app->domain}/{$model->code}";
 
         return [
             'original_url' => $model->url,
-            'short_url' => $url,
+            'code' => $model->code,
         ];
     }
 }

@@ -77,7 +77,7 @@ const showApiKey = async (app) => {
               {{ app.name }}
             </h4>
             <p class="text-sm text-muted-foreground">
-              {{ app.domain }}
+              {{ app.description }}
             </p>
           </div>
           <div class="flex items-center space-x-2 pt-4">

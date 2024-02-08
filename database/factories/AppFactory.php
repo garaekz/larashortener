@@ -18,7 +18,6 @@ class AppFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'domain' => $this->faker->domainName,
         ];
     }
 }

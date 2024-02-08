@@ -23,7 +23,6 @@ class StoreAppRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'domain' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:255'],
         ];
     }

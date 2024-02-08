@@ -20,7 +20,6 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 
 const form = useForm({
   name: '',
-  domain: '',
   description: '',
 });
 
@@ -29,11 +28,6 @@ const formSchema = toTypedSchema(z.object({
     .string()
     .min(3, {
       message: 'Name must be at least 3 characters.',
-    }),
-  domain: z
-    .string()
-    .min(3, {
-      message: 'Domain must be at least 3 characters.',
     }),
   description: z.string().optional(),
 }))
@@ -82,19 +76,6 @@ const onSubmit = () => {
           </FormDescription>
           <FormMessage />
           <InputError class="mt-2" :message="form.errors.name" />
-        </FormItem>
-      </FormField>
-      <FormField v-slot="{ componentField }" name="domain">
-        <FormItem>
-          <FormLabel>Domain</FormLabel>
-          <FormControl>
-            <Input v-model="form.domain" type="text" v-bind="componentField" />
-          </FormControl>
-          <FormDescription>
-            The domain of your app. This is used to generate the shortened URLs.
-          </FormDescription>
-          <FormMessage />
-          <InputError class="mt-2" :message="form.errors.domain" />
         </FormItem>
       </FormField>
       <FormField v-slot="{ componentField }" name="description">

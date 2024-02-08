@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\App;
 use Illuminate\Http\Request;
 
 class ShortController extends Controller
@@ -11,7 +12,13 @@ class ShortController extends Controller
      */
     public function index()
     {
-        return inertia('Short/Index');
+        $apps = App::select('id', 'name', 'ulid')
+            ->where('user_id', auth()->id())
+            ->get();
+
+        return inertia('Short/Index', [
+            'apps' => $apps,
+        ]);
     }
 
     /**
