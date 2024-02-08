@@ -7,17 +7,27 @@ use Illuminate\Http\Request;
 
 class ShortController extends Controller
 {
+    public function noapp()
+    {
+        $app = App::select('ulid')
+            ->where('user_id', auth()->id())
+            ->first();
+
+        return redirect()->route('shorts.index', $app->ulid);
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(App $app)
     {
-        $apps = App::select('id', 'name', 'ulid')
+        $apps = App::select('ulid', 'name')
             ->where('user_id', auth()->id())
             ->get();
-
+            
         return inertia('Short/Index', [
             'apps' => $apps,
+            'current' => $app
         ]);
     }
 
@@ -32,7 +42,7 @@ class ShortController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $ulid)
     {
         //
     }

@@ -36,7 +36,7 @@ defineProps()
                 Dashboard
               </Button>
             </Link>
-            <Link :href="route('shorts.index')">
+            <Link :href="route('shorts.noapp')">
               <Button :variant="route().current('shorts.index') ? 'secondary':'ghost'" class="w-full justify-start">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

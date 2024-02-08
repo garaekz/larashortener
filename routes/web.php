@@ -37,5 +37,10 @@ Route::group(
         });
 
         Route::apiResource('apps', AppController::class);
-        Route::apiResource('shorts', ShortController::class);
+        
+        Route::get('shorts', [ShortController::class, 'noapp'])->name('shorts.noapp');
+        Route::prefix('apps/{app:ulid}')->group(function () {
+            Route::apiResource('shorts', ShortController::class)->only(['index', 'store']);
+        });
+        Route::apiResource('shorts', ShortController::class)->except(['index', 'store']);
     });

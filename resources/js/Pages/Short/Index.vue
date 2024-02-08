@@ -1,10 +1,12 @@
 <script setup>
 import { ref } from "vue";
+import { Link } from "@inertiajs/vue3";
 import MainLayout from "@/Layouts/MainLayout.vue";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/Components/ui/tabs";
 
 defineProps({
     apps: Array,
+    current: Object,
 });
 </script>
 <template>
@@ -23,14 +25,16 @@ defineProps({
                 <p class="text-muted-foreground">Manage your shortened URLs.</p>
             </div>
             <div>
-                <Tabs :default-value="apps[0].ulid" class="w-[400px]">
+                <Tabs :default-value="current.ulid" class="w-[400px]">
                     <TabsList>
                         <TabsTrigger
                             v-for="app in apps"
                             :key="app.ulid"
                             :value="app.ulid"
                         >
+                          <Link :href="route('shorts.index', app.ulid)">
                             {{ app.name }}
+                          </Link>
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent v-for="app in apps" :key="app.ulid" :value="app.ulid">
