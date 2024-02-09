@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\App;
+use App\Models\Short;
 use Illuminate\Http\Request;
 
 class ShortController extends Controller
@@ -24,10 +25,17 @@ class ShortController extends Controller
         $apps = App::select('ulid', 'name')
             ->where('user_id', auth()->id())
             ->get();
-            
+        $current = $app->only('ulid', 'name');
+
+        $shorts = Short::whereHasMorph('shortable', [App::class], function ($query) use ($app) {
+            $query->where('id', $app->id);
+        })
+        ->paginate();
+
         return inertia('Short/Index', [
             'apps' => $apps,
-            'current' => $app
+            'current' => $current,
+            'shorts' => $shorts,
         ]);
     }
 

@@ -16,8 +16,6 @@ class Short extends Model
         'url',
         'code',
         'hits',
-        'user_id',
-        'app_id',
         'expires_at',
         'last_hit_at',
         'status',

@@ -15,8 +15,6 @@ class ShortApiTransformer extends TransformerAbstract
      */
     public function transform(Short $model)
     {
-        $app = $model->shortable;
-
         return [
             'original_url' => $model->url,
             'code' => $model->code,
